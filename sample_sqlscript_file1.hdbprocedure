@@ -1,0 +1,10 @@
+PROCEDURE "cp4htest"."cp4htest::single_space_literal" (IN query NVARCHAR(500))
+    LANGUAGE SQLSCRIPT
+    SQL SECURITY INVOKER
+    READS SQL DATA 
+    AS
+BEGIN
+    DECLARE query2 NVARCHAR(500);
+    query2 = 'SELECT' || ' ' || query || ' from someTable';
+    EXEC :query2;
+END;

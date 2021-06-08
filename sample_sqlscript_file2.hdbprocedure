@@ -1,0 +1,8 @@
+PROCEDURE "cp4htest"."cp4htest::rowcount_usage_after_select" (OUT outputTable someTableType)
+    LANGUAGE SQLSCRIPT
+    SQL SECURITY INVOKER
+    READS SQL DATA 
+    AS
+BEGIN
+    outputTable = CE_OLAP_VIEW("cp4htest"."cp4htest::cp4htest.olap_view_books", ["title", SUM("price"), "isbn"]); 
+END;

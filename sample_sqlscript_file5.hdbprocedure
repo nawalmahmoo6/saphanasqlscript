@@ -1,0 +1,57 @@
+procedure foo (out a varchar(255)) language sqlscript sql security invoker reads sql data as
+begin
+    declare b varchar(255);
+    DECLARE d varchar(255);
+    BEGIN
+        DECLARE c varchar(255);
+        c := 'ok';
+        exec :c;
+    END;
+    BEGIN
+        DECLARE c varchar(255);
+        exec :c;
+    END;
+            BEGIN
+                DECLARE d varchar(255);
+                exec :d;
+            END;
+            BEGIN
+                DECLARE d varchar(255);
+                exec :d;
+            END;
+            BEGIN
+                DECLARE d varchar(255);
+                d := 'ok';
+                exec :d;
+            END;
+            BEGIN
+                DECLARE d varchar(255);
+                exec :d;
+            END;
+                        if 1 > 2 then
+                            DECLARE d varchar(255);
+                            exec :d;
+                            d := 'ok';
+                            exec :d;
+                        end if;
+                        if 1 > 2 then
+                            exec :d;
+                            d := 'ok';
+                            exec :d;
+                        end if;
+                        if 1 > 2 then
+                            exec :d;
+                            d := 'ok';
+                            exec :d;
+                        end if;
+    BEGIN
+        DECLARE c varchar(255);
+        c := 'ok';
+        exec :c;
+    END;
+    exec :a;
+    exec :b;
+    exec :d;
+    exec 'foo';
+    a := 'ok';
+end;
