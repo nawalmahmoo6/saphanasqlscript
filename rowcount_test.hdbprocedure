@@ -1,0 +1,12 @@
+PROCEDURE "cp4htest"."cp4htest::rowcount_usage_after_select" (IN v_author VARCHAR(32), OUT updated_rows INT)
+    LANGUAGE SQLSCRIPT
+    SQL SECURITY INVOKER
+    READS SQL DATA 
+    AS
+BEGIN
+    DECLARE publisher VARCHAR(32);
+    SELECT MAX("publisher") INTO publisher FROM "cp4htest"."cp4htest::cp4htest.books" WHERE "author" = :v_author;
+    EXEC 'SELECT column1, column2 FROM "cp4htest"."cp4htest::cp4htest.books" WHERE "author" = :v_author AND "publisher" = :publisher';
+    INSERT INTO "cp4htest"."cp4htest::cp4htest.books" (SELECT "author", "publisher" FROM "cp4htest"."cp4htest::cp4htest.books" WHERE "author" = :v_author);
+    updated_rows = ::ROWCOUNT;
+END;
